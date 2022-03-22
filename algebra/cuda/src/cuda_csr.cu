@@ -28,6 +28,10 @@
 #include <thrust/scan.h>
 #include <thrust/execution_policy.h>
 
+#if __CUDACC_VER_MAJOR__ < 11 || (__CUDACC_VER_MAJOR__ == 11 && __CUDACC_VER_MINOR__ <= 2)
+#define CUSPARSE_SPMV_ALG_DEFAULT CUSPARSE_MV_ALG_DEFAULT
+#endif
+
 extern CUDA_Handle_t *CUDA_handle;
 
 /* This function is implemented in cuda_lin_alg.cu */
