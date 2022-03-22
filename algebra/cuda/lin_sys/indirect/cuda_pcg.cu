@@ -15,6 +15,7 @@
  *  limitations under the License.
  */
 
+
 #include "cuda_pcg.h"
 #include "csr_type.h"
 #include "cuda_configure.h"
@@ -23,6 +24,10 @@
 #include "cuda_lin_alg.h"
 #include "cuda_wrapper.h"
 #include "helper_cuda.h"    /* --> checkCudaErrors */
+
+#if __CUDACC_VER_MAJOR__ < 11 || (__CUDACC_VER_MAJOR__ == 11 && __CUDACC_VER_MINOR__ <= 2)
+#define CUSPARSE_SPMV_ALG_DEFAULT CUSPARSE_MV_ALG_DEFAULT
+#endif
 
 extern CUDA_Handle_t *CUDA_handle;
 
